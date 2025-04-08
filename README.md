@@ -89,22 +89,22 @@ python shelf_with_cart.py
 ## 📸 Screenshots
 
 ### 🔐 Login Screen
-![Login](assets/screenshots/login.jpeg)
+![Login](frontend_interface/assets/screenshots/login.jpeg)
 
 ### 💳 Entry
-![Entry](assets/screenshots/entry.jpeg)
+![Entry](frontend_interface/assets/screenshots/entry.jpeg)
 
 ### 🛒 Cart Summary
-![Cart Summary](assets/screenshots/cart_summary.jpeg)
+![Cart Summary](frontend_interface/assets/screenshots/cart_summary.jpeg)
 
 ### 💳 Wallet
-![Wallet](assets/screenshots/wallet.jpeg)
+![Wallet](frontend_interface/assets/screenshots/wallet.jpeg)
 
 ### 💳 Checkout
-![Checkout](assets/screenshots/Checkout.jpeg)
+![Checkout](frontend_interface/assets/screenshots/Checkout.jpeg)
 
 ### 🧾 Receipt
-![Receipt](assets/screenshots/receipt.jpeg)
+![Receipt](frontend_interface/assets/screenshots/receipt.jpeg)
 
 ---
 
