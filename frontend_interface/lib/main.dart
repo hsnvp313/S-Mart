@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-<<<<<<< Updated upstream
-import 'package:qr_flutter/qr_flutter.dart';
-=======
 import 'firebase_options.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,11 +14,12 @@ import 'checkout_screen.dart'; // Import CheckoutScreen
 import 'cart_summary_screen.dart';
 import 'app_name_heading.dart';
 import 'drawer.dart';
->>>>>>> Stashed changes
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   print('App started');
   runApp(MyApp());
 }
@@ -33,9 +31,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-<<<<<<< Updated upstream
-      title: 'Amazon Go Cart',
-=======
       title: 'S-Mart',
       theme: ThemeData(
         primarySwatch: Colors.teal,
@@ -92,7 +87,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
->>>>>>> Stashed changes
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginScreen(),
@@ -102,9 +96,6 @@ class MyApp extends StatelessWidget {
               ModalRoute.of(context)?.settings.arguments as String;
           return QRCodeScreen(sessionToken: sessionToken);
         },
-<<<<<<< Updated upstream
-        '/cartSummary': (context) => CartSummaryScreen(),
-=======
         '/cartSummary': (context) => const HomeScreen(),
         '/checkout': (context) {
           final checkoutToken =
@@ -120,15 +111,11 @@ class MyApp extends StatelessWidget {
           }
           return ProfileScreen(userId: user.uid);
         },
->>>>>>> Stashed changes
       },
     );
   }
 }
 
-<<<<<<< Updated upstream
-class LoginScreen extends StatelessWidget {
-=======
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -291,9 +278,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
->>>>>>> Stashed changes
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true; // Toggle password visibility
 
   @override
   Widget build(BuildContext context) {
@@ -305,18 +292,6 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             TextField(
               controller: _emailController,
-<<<<<<< Updated upstream
-              decoration: InputDecoration(labelText: 'Email'),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-=======
               style: GoogleFonts.poppins(fontSize: 16, color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -357,7 +332,6 @@ class _LoginScreenState extends State<LoginScreen> {
               obscureText: _obscurePassword, // Use the toggle value
             ),
             const SizedBox(height: 30),
->>>>>>> Stashed changes
             ElevatedButton(
               onPressed: () async {
                 try {
@@ -408,10 +382,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 }
               },
-<<<<<<< Updated upstream
-              child: Text('Login'),
-            ),
-=======
               style: ElevatedButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
@@ -422,217 +392,12 @@ class _LoginScreenState extends State<LoginScreen> {
               child: const Text('Login', style: TextStyle(fontSize: 16)),
             ),
             const SizedBox(height: 20),
->>>>>>> Stashed changes
             TextButton(
               onPressed: () => Navigator.pushNamed(context, '/signup'),
               child: const Text('Don’t have an account? Sign up here.'),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class SignUpScreen extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                try {
-                  await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: _emailController.text.trim(),
-                    password: _passwordController.text.trim(),
-                  );
-                  Navigator.pop(context);
-                } catch (e) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text('Sign-Up Failed'),
-                      content: Text(e.toString()),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-              },
-              child: Text('Sign Up'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class QRCodeScreen extends StatelessWidget {
-  final String sessionToken;
-
-  QRCodeScreen({required this.sessionToken});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Entry QR Code')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Show this QR Code for Entry",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            QrImageView(
-              data: sessionToken,
-              version: QrVersions.auto,
-              size: 200.0,
-            ),
-            SizedBox(height: 20),
-            // Automatically listen for Firestore updates
-            StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .where('session_token', isEqualTo: sessionToken)
-                  .limit(1)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text(
-                    'Error: ${snapshot.error}',
-                    style: TextStyle(color: Colors.red),
-                  );
-                } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Text(
-                    'Waiting for validation...',
-                    style: TextStyle(fontSize: 16),
-                  );
-                } else {
-                  final documentSnapshot =
-                      snapshot.data!.docs.first; // Non-nullable now
-                  final data = documentSnapshot.data() as Map<String, dynamic>;
-
-                  if (data['validated'] == true) {
-                    final userId = documentSnapshot.id;
-                    final username = data['user'] ?? 'User';
-
-                    // Show Welcome Message
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => AlertDialog(
-                          title: Text("Welcome"),
-                          content: Text("Welcome, $username!"),
-                        ),
-                      );
-
-                      // Wait for 3 seconds and then navigate
-                      Future.delayed(Duration(seconds: 3), () {
-                        Navigator.pop(context); // Dismiss welcome dialog
-                        Navigator.pushReplacementNamed(
-                          context,
-                          '/cartSummary',
-                          arguments: userId,
-                        );
-                      });
-                    });
-                  }
-
-                  return Text(
-                    'Validation in progress...',
-                    style: TextStyle(fontSize: 16, color: Colors.green),
-                  );
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CartSummaryScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final userId = ModalRoute.of(context)!.settings.arguments as String;
-
-    return Scaffold(
-      appBar: AppBar(title: Text('Cart Summary')),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(userId)
-            .snapshots(), // Listening to real-time changes
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.data!.exists) {
-            return Center(child: Text('No cart data found'));
-          } else {
-            final cartData = snapshot.data!.data() as Map<String, dynamic>;
-            final items = cartData['items'] as List<dynamic>;
-            final totalCost = (cartData['total_cost'] as num)
-                .toDouble(); // Ensure total_cost is treated as double
-
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      final item = items[index] as Map<String, dynamic>;
-                      return ListTile(
-                        title: Text(item['product']),
-                        subtitle: Text(
-                            'Price: ₹${item['price'].toDouble()} (Discount: ${item['discount'].toDouble()}%)'),
-                      );
-                    },
-                  ),
-                ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Total Cost: ₹${totalCost.toStringAsFixed(2)}',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            );
-          }
-        },
       ),
     );
   }
