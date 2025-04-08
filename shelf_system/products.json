@@ -1,0 +1,11 @@
+{
+<<<<<<< Updated upstream
+    "Milk": {"price": 50, "stock": 10, "discount": 10},
+    "Bread": {"price": 30, "stock": 20, "discount": 5},
+    "Eggs": {"price": 70, "stock": 15, "discount": 0}
+=======
+    "Milk": {"price": 50, "stock": 10, "discount": 10,"image_url": "https://thumbs.dreamstime.com/b/milk-pack-glass-10595136.jpg"},
+    "Bread": {"price": 30, "stock": 20, "discount": 5,"image_url": "https://thumbs.dreamstime.com/b/loaf-bread-319187.jpg"},
+    "Eggs": {"price": 100, "stock": 15, "discount": 0,"image_url": "https://thumbs.dreamstime.com/b/brown-egg-26626768.jpg"}
+>>>>>>> Stashed changes
+}

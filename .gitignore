@@ -1,0 +1,81 @@
+
+# --- General ---
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.lock
+*.iml
+.DS_Store
+Thumbs.db
+
+# --- Firebase ---
+firebase-adminsdk.json
+google-services.json
+GoogleService-Info.plist
+.firebase/
+.firebaserc
+firebase.json
+
+# --- Dart & Flutter ---
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+.packages
+.pub-cache/
+build/
+*.lock
+
+# --- Android ---
+.gradle/
+local.properties
+.idea/
+*.keystore
+*.jks
+android/app/build/
+android/.gradle/
+android/.kotlin/
+android/**/hs_err_pid*.log
+
+# --- Kotlin ---
+.kotlinc/
+.kotlin/
+*.kotlin_module
+*.kotlin_metadata
+*.class
+
+# --- Flutter Web & Assets ---
+build/web/
+web/assets/
+
+# --- Python (if used) ---
+*.pyc
+*.pyo
+__pycache__/
+env/
+venv/
+.venv/
+.env
+.env.*
+
+# --- VS Code & IntelliJ ---
+.vscode/
+.idea/
+
+# --- Firebase Functions (if using Node backend) ---
+functions/node_modules/
+functions/lib/
+functions/.env
+
+# --- Android Binaries ---
+*.apk
+*.ap_
+*.aab
+
+# --- Miscellaneous ---
+*.crt
+*.pem
+*.key
+*.credentials.json

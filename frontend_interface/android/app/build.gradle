@@ -1,0 +1,67 @@
+plugins {
+    id "com.android.application"
+    id "com.google.gms.google-services" // Firebase integration
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.example.smart" // Ensure this matches your app package name
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.smart" // Your app's unique ID
+        minSdk 23
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        // Enable MultiDex if your app requires more methods
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            // Enabling shrinking, obfuscation, and optimization
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    // Flutter configuration
+    buildFeatures {
+        viewBinding true // Optional: Enable View Binding
+    }
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.0.0') // Align Firebase versions
+    implementation 'androidx.multidex:multidex:2.0.1' // Required for MultiDex support
+
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // Flutter dependencies
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+
+    // Kotlin dependencies
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+// Apply the Google Services plugin
+apply plugin: 'com.google.gms.google-services'
