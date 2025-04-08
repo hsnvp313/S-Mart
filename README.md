@@ -88,6 +88,9 @@ python shelf_with_cart.py
 
 ## 📸 Screenshots
 
+### 🔐 Signup Screen
+![Signup](frontend_interface/assets/screenshots/signup.jpeg)
+
 ### 🔐 Login Screen
 ![Login](frontend_interface/assets/screenshots/login.jpeg)
 
