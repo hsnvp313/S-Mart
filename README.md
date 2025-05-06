@@ -52,7 +52,7 @@ frontend_interface/       # Flutter frontend (Web + Android)
 
 shelf_system/             # Python backend with OpenCV + Firebase
   ├── shelf_with_cart.py
-  ├── firebase-adminsdk.json   # 🔒 Do not commit!
+  ├── firebase-adminsdk.json  
   ├── cart_summary.json
   └── products.json
 ```
